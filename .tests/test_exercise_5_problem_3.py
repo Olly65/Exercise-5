@@ -6,6 +6,7 @@ class TestProblem3:
     @points(0, "Problem 3, Part 1: Dataframes 'kumpula' and 'rovaniemi' are not correctly defined!")
     def test_problem_3_part_1_length(self, problem3):
         section_data, namespace = problem3
+        section = "Part 1"
 
         # Check if section exists in the dictionary
         assert section in section_data, f"Section '{section}' not found in section_data"
