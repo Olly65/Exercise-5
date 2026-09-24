@@ -40,14 +40,10 @@ class TestProblem1:
             'DEWP', 'SLP', 'ALT', 'STP', 'MAX', 'MIN', 'PCP01', 'PCP06', 'PCP24', 'PCPXX', 'SD'
         ]
 
-        # Assert the data types of 'data'
-        assert variables['data'].dtypes.tolist() == [
-            'int64', 'int64', 'int64', 'float64', 'float64', 'float64', 'float64', 'object',
-            'float64', 'float64', 'float64', 'float64', 'float64', 'float64', 'float64', 'float64',
-            'float64', 'float64', 'float64', 'float64', 'float64', 'float64', 'float64', 'float64',
-            'float64', 'float64', 'float64', 'float64', 'float64', 'float64', 'float64', 'float64',
-            'float64'
-        ]
+        # Assert the data types of 'data' (SKC is 'str' in pandas>=3, 'object' in pandas<3)
+        dtypes = [str(t) for t in variables['data'].dtypes.tolist()]
+        assert dtypes[7] in ('str', 'object')
+        assert dtypes[:7] + dtypes[8:] == ['int64', 'int64', 'int64', 'float64', 'float64', 'float64', 'float64'] + ['float64'] * 25
 
     @points(1, "Problem 1, Part 3: Variable 'temp_mean', 'temp_max_std' or 'station_count' incorrectly defined!")
     def test_problem_1_part_3(self, problem1):
